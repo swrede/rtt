@@ -74,21 +74,21 @@ extern "C"
 
     typedef struct timespec TIME_SPEC;
 
-    /* fake clock_gettime for systems like darwin */
-    #define  CLOCK_REALTIME 0
-    static inline int clock_gettime(int clk_id /*ignored*/, struct timespec *tp)
-    {
-        struct timeval now;
-        int rv = gettimeofday(&now, NULL);
-        if (rv != 0){
-            tp->tv_sec = 0;
-            tp->tv_nsec = 0;
-            return rv;
-        }
-        tp->tv_sec = now.tv_sec;
-        tp->tv_nsec = now.tv_usec * 1000;
-        return 0;
-    }
+    // /* fake clock_gettime for systems like darwin */
+    // #define  CLOCK_REALTIME 0
+    // static inline int clock_gettime(int clk_id /*ignored*/, struct timespec *tp)
+    // {
+    //     struct timeval now;
+    //     int rv = gettimeofday(&now, NULL);
+    //     if (rv != 0){
+    //         tp->tv_sec = 0;
+    //         tp->tv_nsec = 0;
+    //         return rv;
+    //     }
+    //     tp->tv_sec = now.tv_sec;
+    //     tp->tv_nsec = now.tv_usec * 1000;
+    //     return 0;
+    // }
 
     // high-resolution time to timespec
     static inline TIME_SPEC ticks2timespec(TICK_TIME hrt)
